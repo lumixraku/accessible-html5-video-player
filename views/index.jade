@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Accessible HTML5 Video Player
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='css/index.css')
+    link(rel='stylesheet', href='css/px-video.css')
+
+  body
+    div#wrapper
+      div#brand
+        a(href='http://paypal.github.io/')
+          img(src='images/PayPalOpenSourcecolor.svg', width='224', height='28', alt='PayPal open source')
+      div#myvid.px-video-container
+        div.px-video-img-captions-container
+          div.px-video-captions hide
+          video(width='640', height='360', poster='#{pic}', controls)
+            source(src='#{src}', type='video/mp4')
+        div.px-video-controls
+    script(src='js/strings.js')
+    script(src='js/px-video.js')
+    script(src='js/index.js')
