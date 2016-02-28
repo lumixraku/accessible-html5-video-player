@@ -4,27 +4,36 @@ var exec = require('child_process').exec;
 
 
 function existsSync(filePath) {
-  try {
-    console.log(filePath, 'exists');
-    fs.statSync(filePath);
-  } catch (err) {
-    if (err.code == 'ENOENT') return false;
-  }
-  return true;
+  return new Promise(function(resolve, reject) {
+    try {
+      fs.statSync(filePath);
+    } catch (err) {
+      console.log(filePath, ' not exists');
+      reject();
+    }
+    resolve();
+  })
 }
 
 function generateThumbnail(path, name, thumbnailFolder) {
-  return new Promise(function(resolve, reject) {
-      if (existsSync(thumbnailFolder + name + '.png')) {
-        resolve();
-    } else {
-      var cmd = ["ffmpeg -i ", path, " -ss 00:00:01.000 -vframes 1 ", thumbnailFolder + name + ".png"].join('');
+  existsSync(thumbnailFolder + name + '.png').then(function() {
+    //没有报错  文件已存在
+    return Promise.resolve();
+  }, function() {
+
+    return new Promise(function(resolve, reject) {
+
+      var from = "\""+path+"\""; //执行CMD命令  带有空格的文件名要用引号包裹
+      var dest = thumbnailFolder + "\"" + name +"\"" + ".png";
+      console.log(from , dest);
+      var cmd = ["ffmpeg -i ", from, " -ss 00:00:01.000 -vframes 1 ", dest].join('');
       exec(cmd, function(err) {
-        console.log(name, ' done');
+        console.log(err, name, 'ffmeg err');
         resolve();
       });
+    });
 
-    }
+
   });
 }
 
@@ -41,27 +50,26 @@ function getFiles(dir, traverse, _files) {
       if (/\.DS_Store$/.test(name)) {
 
       } else {
-        _files.push(['/media/'+name, name]);
+        _files.push(name);
       }
     }
   }
   return _files;
 }
 
-var folder = __dirname + '/media';
+var folder = __dirname + '/media/';
 var files = getFiles(folder);
 var promises = [];
-files.forEach(function(file) {
-  promises.push(generateThumbnail(file[0], file[1], folder + '/thumbnails/'));
+files.forEach(function(name) {
+  promises.push(generateThumbnail(folder + name, name , folder + 'thumbnails/'));
 });
 
 module.exports = Promise.all(promises).then(function() {
-  console.log('All DONE');
-  var list = files.map(function(file) {
+  var list = files.map(function(name) {
     return {
-      name: file[1],
-      pic: '/media/thumbnails/' + file[1] + '.png',
-      src: file[0]
+      name: name,
+      pic: '/media/thumbnails/' + name + '.png',
+      src: '/media/' + name
     }
   });
   return {

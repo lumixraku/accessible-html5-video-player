@@ -12,7 +12,6 @@ app.use(express.static(__dirname));
 
 //访问根目录时
 app.get('/', function(req, res){
-  console.log('/');
   thumbnails.then(function(data){
     console.log(data);
     res.render('index', data);

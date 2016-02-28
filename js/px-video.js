@@ -206,34 +206,34 @@ function InitPxVideo(options) {
 	if (options.debug) {
 		console.log("Inserting custom video controls");
 	}
-	obj.controls.innerHTML = '<div class="clearfix">' +
-			'<div class="pull-left">' +
+	obj.controls.innerHTML = '<div class="control-wrapper clearfix">' +
+			'<div class="pull-left  mid-wrapper">' +
 				'<button class="px-video-restart" title="' + GLOBAL_STRINGS['RESTART'] + '"><span class="sr-only">' + GLOBAL_STRINGS['RESTART'] + '</span></button>' +
 				'<button class="px-video-rewind" title="' + GLOBAL_STRINGS['REWIND'] + '"><span class="sr-only">rewind <span class="px-seconds">10</span> seconds</span></button>' +
 				'<button class="px-video-play" aria-label="'+obj.playAriaLabel+'" title="' + GLOBAL_STRINGS['PLAY'] + '"><span class="sr-only">' + GLOBAL_STRINGS['PLAY'] + '</span></button>' +
 				'<button class="px-video-pause hide" title="' + GLOBAL_STRINGS['PAUSE'] + '"><span class="sr-only">' + GLOBAL_STRINGS['PAUSE'] + '</span></button>' +
 				'<button class="px-video-forward" title="' + GLOBAL_STRINGS['FORWARD'] + '""><span class="sr-only">forward <span class="px-seconds">10</span> seconds</span></button>' +
 			'</div>' +
-			'<div class="px-video-mute-btn-container pull-left" title="' + GLOBAL_STRINGS['MUTE'] + '">' +
+			'<div class="px-video-mute-btn-container pull-left mid-wrapper" title="' + GLOBAL_STRINGS['MUTE'] + '">' +
 				'<input class="px-video-mute sr-only" id="btnMute'+obj.randomNum+'" type="checkbox" />' +
 				'<label id="labelMute'+obj.randomNum+'" for="btnMute'+obj.randomNum+'"><span class="sr-only">' + GLOBAL_STRINGS['MUTE'] + '</span></label>' +
 			'</div>' +
-			'<div class="pull-left">' +
+			'<div class="pull-left mid-wrapper">' +
 				'<label for="volume'+obj.randomNum+'" class="sr-only">Volume:</label><input id="volume'+obj.randomNum+'" class="px-video-volume" type="range" min="0" max="10" value="5" />' +
 			'</div>' +
 			'<div class="px-video-captions-btn-container pull-left hide" title="' + GLOBAL_STRINGS['CAPTIONS'] + '">' +
 				'<input class="px-video-btnCaptions sr-only" id="btnCaptions'+obj.randomNum+'" type="checkbox" />' +
 				'<label for="btnCaptions'+obj.randomNum+'"><span class="sr-only">' + GLOBAL_STRINGS['CAPTIONS'] + '</span></label>' +
 			'</div>' +
-			'<div class="px-video-fullscreen-btn-container pull-left show" title="' + GLOBAL_STRINGS['TOGGLE_FULL_SCREEN'] + '">' +
+			'<div class="px-video-fullscreen-btn-container pull-left mid-wrapper show" title="' + GLOBAL_STRINGS['TOGGLE_FULL_SCREEN'] + '">' +
 				'<input class="px-video-btnFullScreen sr-only" id="btnFullscreen'+obj.randomNum+'" type="checkbox" />' +
 				'<label for="btnFullscreen'+obj.randomNum+'"><span class="sr-only">' + GLOBAL_STRINGS['TOGGLE_FULL_SCREEN'] + '</span></label>' +
 			'</div>' +
-			'<div class="px-video-time">' +
+			'<div class="px-video-time pull-right mid-wrapper">' +
 				'<span class="sr-only">time</span> <span class="px-video-duration">00:00</span>' +
 			'</div>' +
 		'</div>' +
-		'<div>' +
+		'<div class="fontZero">' +
 			'<progress class="px-video-progress" max="100" value="0"><span>0</span>% played</progress>' +
 		'</div>';
 

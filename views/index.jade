@@ -14,10 +14,17 @@ html
           img(src='images/PayPalOpenSourcecolor.svg', width='224', height='28', alt='PayPal open source')
       div#myvid.px-video-container
         div.px-video-img-captions-container
-          div.px-video-captions hide
-          video(width='640', height='360', poster='#{pic}', controls)
+          div.px-video-captions.hide
+          video(id='video', poster='#{pic}', controls)
             source(src='#{src}', type='video/mp4')
         div.px-video-controls
+      div.list
+        for item in list
+          div.clearfix.item(data-src='#{item.src}', data-pic='#{item.pic}')
+            div.pic-wrapper
+              div.pic(style="background-image:url('#{item.pic}'); background-size:cover")
+            div.title #{item.name}
+    script(src='js/util.js')
     script(src='js/strings.js')
     script(src='js/px-video.js')
     script(src='js/index.js')
